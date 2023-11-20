@@ -2,27 +2,27 @@
   "weapons": [
     {
       "name": "AK-47",
-      "id": 1
+      "id": 1,
+      "description": "ratatatatat",
+      "price": 2700
     },
     {
-      "name": "USP-S",
-      "id": 2
+      "name": "USP",
+      "id": 2,
+      "description": "pifpifpaf",
+      "price": 400
     },
     {
-      "name": "",
-      "id": 3
+      "name": "M4A4",
+      "id": 3,
+      "description": "rtttatatatatata",
+      "price": 2900
     },
     {
-      "name": "",
+      "name": "Knife",
+      "description": "butter knife",
+      "price": "0",
       "id": 4
-    },
-    {
-      "name": "",
-      "id": 5
-    },
-    {
-      "name": "",
-      "id": 6
     }
   ]
 }
