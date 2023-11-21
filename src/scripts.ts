@@ -21,7 +21,7 @@ const timeAgo = (timestamp: string): string => {
     const hours = Math.floor(minutes / 60);
 
     if (hours >= 24) {
-        return `${createdDate.toLocaleString()}`; // Display full date if more than a day
+        return `${createdDate.toLocaleString()}`; 
     } else if (hours >= 1) {
         return `${hours} hour${hours > 1 ? 's' : ''} ago`;
     } else if (minutes >= 1) {
@@ -31,45 +31,67 @@ const timeAgo = (timestamp: string): string => {
     }
 };
 
+
 const drawWeapons = () => {
     const result = axios.get<weapon[]>('http://localhost:3004/weapons');
 
     weaponWrapper.innerHTML = '';
 
-        result.then(({ data }) => {
-    
-            data.forEach((weapon) => {
-                weaponWrapper.innerHTML += `
-                <div class="weapon-box">
-                    <div class="img-box">
-                        <img src="${weapon.image}" alt="${weapon.name}">
-                    </div>
-                        <h1>${weapon.name}</h1>
-                        <p>${weapon.description}</p>
-                        <p>Weapon Price : $${weapon.price}</p>
-                    <div>
-                        <button class="weapon-edit edit__button button" data-weapon-id = "${weapon.id}">Edit</button>
-                        <button class="weapon-delete button" data-weapon-id = "${weapon.id}">Delete</button>
-                    </div>
-                    <p class="weapon__created">Created ${timeAgo(weapon.createdAt)}</p>
+    result.then(({ data }) => {
+        data.forEach((weapon) => {
+            weaponWrapper.innerHTML += `
+            <div class="weapon-box">
+                <div class="img-box">
+                    <img src="${weapon.image}" alt="${weapon.name}">
                 </div>
-        `;});
+                <h1>${weapon.name}</h1>
+                <p>${weapon.description}</p>
+                <p>Weapon Price : $${weapon.price}</p>
+                <div>
+                    <button class="weapon-edit edit__button button" data-weapon-id="${weapon.id}">Edit</button>
+                    <button class="weapon-delete button" data-weapon-id="${weapon.id}">Delete</button>
+                </div>
+                <p class="weapon__created">Created ${timeAgo(weapon.createdAt)}</p>
+            </div>
+        `;
+        });
 
         const weaponsDelete = document.querySelectorAll<HTMLButtonElement>('.weapon-delete');
 
         weaponsDelete.forEach((weaponDelete) => {
             weaponDelete.addEventListener('click', () => {
-                const {weaponId} = weaponDelete.dataset;
+                const { weaponId } = weaponDelete.dataset;
 
                 axios.delete(`http://localhost:3004/weapons/${weaponId}`).then(() => {
                     drawWeapons();
-                }); 
+                });
             });
-        });    
+        });
     });
 };
 
 drawWeapons();
+
+const populateWeaponForm = (weapon: weapon) => {
+    const weaponInput = weaponForm.querySelector<HTMLInputElement>('input[name="weapon"]');
+    const weaponDescription = weaponForm.querySelector<HTMLInputElement>('input[name="weapon-description"]');
+    const weaponPrice = weaponForm.querySelector<HTMLInputElement>('input[name="weapon-price"]');
+
+    weaponInput.value = weapon.name;
+    weaponDescription.value = weapon.description;
+    weaponPrice.value = weapon.price.toString();
+};
+
+document.addEventListener('click', (event) => {
+    const editButton = event.target as HTMLElement;
+    if (editButton.classList.contains('weapon-edit')) {
+        const weaponId = editButton.dataset.weaponId;
+        
+        axios.get<weapon>(`http://localhost:3004/weapons/${weaponId}`).then(({ data }) => {
+            populateWeaponForm(data);
+        });
+    }
+});
 
 const weaponForm = document.querySelector('.weapon-form');
 
@@ -83,27 +105,33 @@ weaponForm.addEventListener('submit', async (event) => {
 
     const weaponInputValue = weaponInput.value;
     const weaponDescriptionValue = weaponDescription.value;
-    const weaponPriceValue = weaponPrice.value;
+    const weaponPriceValue = Number(weaponPrice.value);
     const weaponImgValue = weaponImg.files[0];
 
     const createdAt = new Date();
 
-    axios.post<weapon>('http://localhost:3004/weapons',
-    {
+    let imageUrl;
+
+    if (weaponImgValue) {
+        imageUrl = URL.createObjectURL(weaponImgValue);
+    }
+
+    const isEdit = !!weaponInput.dataset.editId;
+    const url = isEdit ? `http://localhost:3004/weapons/${weaponInput.dataset.editId}` : 'http://localhost:3004/weapons';
+
+    const method: 'post' | 'put' = isEdit ? 'put' : 'post';
+
+    axios[method]<weapon>(url, {
         name: weaponInputValue,
         description: weaponDescriptionValue,
         price: weaponPriceValue,
-        image: weaponImgValue,
-        createdAt: createdAt.toISOString()
-        }).then(() => {
-            weaponInput.value = '';
-            weaponDescription.value = '';
-            weaponPrice.value = '';
-            drawWeapons();
+        image: imageUrl,
+        createdAt: createdAt.toISOString(),
+    }).then(() => {
+        weaponInput.value = '';
+        weaponDescription.value = '';
+        weaponPrice.value = '';
+        weaponInput.dataset.editId = '';
+        drawWeapons();
     });
-    
 });
-
-
-
-

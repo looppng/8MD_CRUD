@@ -18,19 +18,19 @@
     },
     {
       "name": "M4A4",
-      "id": 3,
-      "description": "The M4 carbine (officially Carbine, Caliber 5.56 mm, M4) is a 5.56×45mm NATO, gas-operated,[b] magazine-fed carbine developed in the United States during the 1980s. It is a shortened version of the M16A2 assault rifle.",
-      "price": 2900,
-      "createdAt": "2023-11-21T09:22:44.512Z",
-      "image": "./assets/images/m4a4.png"
+      "description": "The M4A4 is a Counter-Terrorist rifle featured in Counter-Strike: Global Offensive & Counter-Strike 2, replacing the previous Maverick M4A1 Carbine. In Global Offensive, it has the M4A1-S as its alternative loadout.",
+      "price": 3100,
+      "image": "./assets/images/m4a4.png",
+      "createdAt": "2023-11-21T14:04:59.004Z",
+      "id": 3
     },
     {
-      "name": "Knife",
-      "description": "A knife (pl.: knives; from Old Norse knifr 'knife, dirk') is a tool or weapon with a cutting edge or blade, usually attached to a handle or hilt.",
-      "price": 0,
-      "id": 4,
-      "createdAt": "2023-11-21T09:22:44.512Z",
-      "image": "./assets/images/knife.png"
+      "name": "AWP",
+      "description": "Considered a \"high risk, high reward\" weapon due to its high powers but slow firing rate, reload speed, and movement speed, the AWP is one of the most used weapons in the Counter-Strike series.",
+      "price": 4750,
+      "image": "blob:http://localhost:3000/36e3482f-b106-4167-bdf1-59321dd4b4df",
+      "createdAt": "2023-11-21T14:07:48.432Z",
+      "id": 4
     }
   ]
 }
