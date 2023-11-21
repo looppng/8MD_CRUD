@@ -3,26 +3,34 @@
     {
       "name": "AK-47",
       "id": 1,
-      "description": "ratatatatat",
-      "price": 2700
+      "description": "The AK-47, officially known as the Avtomat Kalashnikova (Russian: Автомат Калашникова, lit. 'Kalashnikov's automatic [rifle]'; also known as the Kalashnikov or just AK), is a gas-operated assault rifle that is chambered for the 7.62×39mm cartridge.",
+      "price": 2700,
+      "createdAt": "2022-11-21T09:22:44.512Z",
+      "image": "./assets/images/ak47.png"
     },
     {
-      "name": "USP",
+      "name": "AUG",
       "id": 2,
-      "description": "pifpifpaf",
-      "price": 400
+      "description": "The Steyr AUG (German: Armee-Universal-Gewehr, lit. 'army universal rifle') is an Austrian bullpup assault rifle chambered for the 5.56×45mm NATO intermediate cartridge, designed in the 1960s by Steyr-Daimler-Puch, and now manufactured by Steyr Arms GmbH & Co KG.",
+      "price": 400,
+      "createdAt": "2023-11-21T09:22:44.512Z",
+      "image": "./assets/images/aug.png"
     },
     {
       "name": "M4A4",
       "id": 3,
-      "description": "rtttatatatatata",
-      "price": 2900
+      "description": "The M4 carbine (officially Carbine, Caliber 5.56 mm, M4) is a 5.56×45mm NATO, gas-operated,[b] magazine-fed carbine developed in the United States during the 1980s. It is a shortened version of the M16A2 assault rifle.",
+      "price": 2900,
+      "createdAt": "2023-11-21T09:22:44.512Z",
+      "image": "./assets/images/m4a4.png"
     },
     {
       "name": "Knife",
-      "description": "butter knife",
-      "price": "0",
-      "id": 4
+      "description": "A knife (pl.: knives; from Old Norse knifr 'knife, dirk') is a tool or weapon with a cutting edge or blade, usually attached to a handle or hilt.",
+      "price": 0,
+      "id": 4,
+      "createdAt": "2023-11-21T09:22:44.512Z",
+      "image": "./assets/images/knife.png"
     }
   ]
 }
