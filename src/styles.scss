@@ -29,11 +29,22 @@ body {
 
 .add__button {
   background-color: blue;
-  margin: 0 auto;
 }
 
 .edit__button {
   background-color: green;
+}
+
+.save__button {
+  background-color: green;
+  display: none;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .weapon-box {

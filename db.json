@@ -3,7 +3,7 @@
     {
       "name": "AK-47",
       "id": 1,
-      "description": "The AK-47, officially known as the Avtomat Kalashnikova (Russian: Автомат Калашникова, lit. 'Kalashnikov's automatic [rifle]'; also known as the Kalashnikov or just AK), is a gas-operated assault rifle that is chambered for the 7.62×39mm cartridge.",
+      "description": "The AK-47, or CV-47 as it was previously known before Global Offensive, is a rifle featured in the Counter-Strike series, exclusively available to the Terrorists. The counterpart for the Counter-Terrorists is the Maverick M4A1 Carbine before Global Offensive and the M4A4 / M4A1-S in Global Offensive.",
       "price": 2700,
       "createdAt": "2022-11-21T09:22:44.512Z",
       "image": "./assets/images/ak47.png"
@@ -11,25 +11,25 @@
     {
       "name": "AUG",
       "id": 2,
-      "description": "The Steyr AUG (German: Armee-Universal-Gewehr, lit. 'army universal rifle') is an Austrian bullpup assault rifle chambered for the 5.56×45mm NATO intermediate cartridge, designed in the 1960s by Steyr-Daimler-Puch, and now manufactured by Steyr Arms GmbH & Co KG.",
-      "price": 400,
+      "description": "The AUG, or Bullpup, as it was previously known, is a rifle featured in the Counter-Strike series, exclusive to the Counter-Terrorists. The counterpart for the Terrorists is the Krieg 552 (before Global Offensive) and SG 553 in Global Offensive.",
+      "price": 3300,
       "createdAt": "2023-11-21T09:22:44.512Z",
       "image": "./assets/images/aug.png"
-    },
-    {
-      "name": "M4A4",
-      "description": "The M4A4 is a Counter-Terrorist rifle featured in Counter-Strike: Global Offensive & Counter-Strike 2, replacing the previous Maverick M4A1 Carbine. In Global Offensive, it has the M4A1-S as its alternative loadout.",
-      "price": 3100,
-      "image": "./assets/images/m4a4.png",
-      "createdAt": "2023-11-21T14:04:59.004Z",
-      "id": 3
     },
     {
       "name": "AWP",
       "description": "Considered a \"high risk, high reward\" weapon due to its high powers but slow firing rate, reload speed, and movement speed, the AWP is one of the most used weapons in the Counter-Strike series.",
       "price": 4750,
-      "image": "blob:http://localhost:3000/36e3482f-b106-4167-bdf1-59321dd4b4df",
-      "createdAt": "2023-11-21T14:07:48.432Z",
+      "image": "blob:http://localhost:3000/ca220fb8-af59-46d8-9609-969c29ba5d6a",
+      "createdAt": "2023-11-23T13:38:12.297Z",
+      "id": 3
+    },
+    {
+      "name": "Knife",
+      "description": "butter knife is good",
+      "price": 0,
+      "image": "blob:http://localhost:3000/05081bc2-be92-4c02-b148-15087919d870",
+      "createdAt": "2023-11-23T13:39:09.637Z",
       "id": 4
     }
   ]

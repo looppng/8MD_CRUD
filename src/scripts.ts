@@ -83,13 +83,69 @@ const populateWeaponForm = (weapon: weapon) => {
 };
 
 document.addEventListener('click', (event) => {
-    const editButton = event.target as HTMLElement;
+    const editButton = event.target as HTMLButtonElement;
     if (editButton.classList.contains('weapon-edit')) {
         const weaponId = editButton.dataset.weaponId;
         
         axios.get<weapon>(`http://localhost:3004/weapons/${weaponId}`).then(({ data }) => {
             populateWeaponForm(data);
+
+            const saveButton = document.querySelector<HTMLButtonElement>('.save__button');
+            const removeAdd = document.querySelector<HTMLButtonElement>('.add__button');
+
+            removeAdd.style.display = 'none';
+            saveButton.style.display = 'inline-block';
+            saveButton.dataset.weaponId = weaponId;
         });
+    }
+});
+
+
+const saveButton = document.querySelector<HTMLButtonElement>('.save__button');
+
+saveButton.addEventListener('click', async () => {
+    const weaponId = saveButton.dataset.weaponId;
+
+    const weaponInput = weaponForm.querySelector<HTMLInputElement>('input[name="weapon"]');
+    const weaponDescription = weaponForm.querySelector<HTMLInputElement>('input[name="weapon-description"]');
+    const weaponPrice = weaponForm.querySelector<HTMLInputElement>('input[name="weapon-price"]');
+    const weaponImg = weaponForm.querySelector<HTMLInputElement>('input[name="weapon-image"]');
+
+    const weaponInputValue = weaponInput.value;
+    const weaponDescriptionValue = weaponDescription.value;
+    const weaponPriceValue = Number(weaponPrice.value);
+    const weaponImgValue = weaponImg.files[0];
+
+    const createdAt = new Date();
+        try {
+            let imageUrl;
+            if (weaponImgValue) {
+                imageUrl = URL.createObjectURL(weaponImgValue);
+            } else {
+                const existingWeapon = await axios.get<weapon>(`http://localhost:3004/weapons/${weaponId}`);
+                imageUrl = existingWeapon.data.image;
+            }
+        
+
+        const removeAdd = document.querySelector<HTMLButtonElement>('.add__button');
+
+        const url = `http://localhost:3004/weapons/${weaponId}`;
+
+        await axios.patch<weapon>(url, {
+            name: weaponInputValue,
+            description: weaponDescriptionValue,
+            price: weaponPriceValue,
+            image: imageUrl,
+            createdAt: createdAt.toISOString(),
+        });
+
+        weaponInput.value = '';
+        weaponDescription.value = '';
+        weaponPrice.value = '';
+        saveButton.style.display = 'none';
+        removeAdd.style.display = 'block';
+    } catch (error) {
+        console.error('Error updating weapon:', error);
     }
 });
 
@@ -121,17 +177,22 @@ weaponForm.addEventListener('submit', async (event) => {
 
     const method: 'post' | 'put' = isEdit ? 'put' : 'post';
 
-    axios[method]<weapon>(url, {
-        name: weaponInputValue,
-        description: weaponDescriptionValue,
-        price: weaponPriceValue,
-        image: imageUrl,
-        createdAt: createdAt.toISOString(),
-    }).then(() => {
+    try {
+        await axios[method]<weapon>(url, {
+            name: weaponInputValue,
+            description: weaponDescriptionValue,
+            price: weaponPriceValue,
+            image: imageUrl,
+            createdAt: createdAt.toISOString(),
+        });
+
+
         weaponInput.value = '';
         weaponDescription.value = '';
         weaponPrice.value = '';
-        weaponInput.dataset.editId = '';
+
         drawWeapons();
-    });
+    } catch (error) {
+        console.error('Error updating/adding weapon:', error);
+    }
 });
